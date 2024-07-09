@@ -28,7 +28,7 @@ jobs:
         run: |
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
             && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 https://media.githubusercontent.com/media/Arzhangwei/GG_Study/main/google-chrome-stable_126.0.6478.126-1_amd64.deb) \
-            && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "https://raw.githubusercontent.com/Arzhangwei/GG_Study/main/chromedriver_linux64.zip" \
+            && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "https://media.githubusercontent.com/media/Arzhangwei/GG_Study/main/chromedriver_linux64.zip" \
             && cd /tmp \
             && unzip chromedriver_linux64.zip \
             && rm -rf chromedriver_linux64.zip \
