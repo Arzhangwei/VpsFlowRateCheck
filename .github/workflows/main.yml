@@ -27,8 +27,8 @@ jobs:
       - name: Install ChromeDriver
         run: |
             CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
-            && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 https://extras.getpagespeed.com/redhat/8/x86_64/RPMS/google-chrome-stable-123.0.6312.86-1.el8.x86_64.rpm) \
-            && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "https://storage.googleapis.com/chrome-for-testing-public/123.0.6312.86/linux64/chromedriver-linux64.zip" \
+            && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 https://dl.google.com/linux/deb/pool/main/g/google-chrome-stable/google-chrome-stable_126.0.6478.126-1_amd64.deb) \
+            && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "https://github.com/dreamshao/chromedriver/blob/main/126.0.6478.126%20chromedriver-linux64.zip" \
             && cd /tmp \
             && unzip chromedriver_linux64.zip \
             && rm -rf chromedriver_linux64.zip \
