@@ -40,4 +40,5 @@ jobs:
         env:
           CC_USERNAME: ${{ secrets.CC_USERNAME }}  # 使用密钥 SITYUN_USER 作为环境变量
           CC_PASSWORD: ${{ secrets.CC_PASSWORD }}  # 使用密钥 SITYUN_PASSWORD 作为环境变量
+          PUSHPLUS: ${{ secrets.PUSHPLUS}}
         run: python flowRate_warnRemotegithub.py  # 运行 flowRate_warnRemotegithub.py 脚本
