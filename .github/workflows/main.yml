@@ -28,10 +28,10 @@ jobs:
         run: |
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
             && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 https://dl.google.com/linux/deb/pool/main/g/google-chrome-stable/google-chrome-stable_126.0.6478.126-1_amd64.deb) \
-            && wget --output-file /tmp/chromedriver_linux64.zip https://raw.githubusercontent.com/Arzhangwei/GG_Study/main/chromedriver_linux64.zip \
+            && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "https://raw.githubusercontent.com/Arzhangwei/GG_Study/main/chromedriver_linux64.zip" \
             && cd /tmp \
             && unzip chromedriver_linux64.zip \
-            && rm -rf chromedriver_linux64.zip \ && cd /chromedrive-linux64 \
+            && rm -rf chromedriver_linux64.zip \ 
             && sudo mv chromedriver /usr/local/bin/chromedriver \
             && sudo chmod +x /usr/local/bin/chromedriver \
             && chromedriver --version  # 为已安装的 Google Chrome 版本安装 ChromeDriver
