@@ -31,16 +31,13 @@ jobs:
             && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "https://raw.githubusercontent.com/Arzhangwei/GG_Study/main/chromedriver_linux64.zip" \
             && cd /tmp \
             && unzip chromedriver_linux64.zip \
-            && rm -rf chromedriver_linux64.zip \ 
+            && rm -rf chromedriver_linux64.zip \
             && sudo mv chromedriver /usr/local/bin/chromedriver \
             && sudo chmod +x /usr/local/bin/chromedriver \
-            && chromedriver --version  # 为已安装的 Google Chrome 版本安装 ChromeDriver
-
-      - name: 'Get Date'
-        run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Shenzhen' date '+%Y-%m-%d %T')"  # 设置环境变量 REPORT_DATE，值为深圳时区的当前日期和时间
+            && chromedriver --version
 
       - name: 'flowRate_warnRemotegithub'
         env:
-          SITUYUN_USER: ${{ secrets.SITYUN_USER }}  # 使用密钥 SITYUN_USER 作为环境变量
-          SITUYUN_PASSWORD: ${{ secrets.SITYUN_PASSWORD }}  # 使用密钥 SITYUN_PASSWORD 作为环境变量
-        run: python flowRate_warnRemotegithub.py  # 运行 flowRate_warnRemotegithub.py 脚本
+          SITUYUN_USER: ${{ secrets.SITYUN_USER }} 
+          SITUYUN_PASSWORD: ${{ secrets.SITYUN_PASSWORD }}
+        run: python flowRate_warnRemotegithub.py 
