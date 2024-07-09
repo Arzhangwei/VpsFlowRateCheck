@@ -1,0 +1,46 @@
+name: 'GitHub Actions SCUT SIGN IN'
+
+on:
+  watch:
+    types: started  # 当有人开始关注这个仓库时触发
+  push:  # 当有推送到这个仓库时触发
+  schedule:
+    - cron: '0 * * * *'  # 每天 UTC 时间 21:00 触发
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest  # 指定运行环境为最新的 Ubuntu
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v1  # 检出仓库代码
+      
+      - name: 'Set up Python'
+        uses: actions/setup-python@v1  # 设置 Python 环境
+        with:
+          python-version: '3.8'  # 指定 Python 版本为 3.7
+
+      - name: 'Install requirements'
+        run: |
+          python -m pip install --upgrade pip  # 升级 pip
+          pip install -r requirements.txt  # 从 requirements.txt 安装所需的 Python 包
+
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
+            && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}) \
+            && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" \
+            && cd /tmp \
+            && unzip chromedriver_linux64.zip \
+            && rm -rf chromedriver_linux64.zip \
+            && sudo mv chromedriver /usr/local/bin/chromedriver \
+            && sudo chmod +x /usr/local/bin/chromedriver \
+            && chromedriver --version  # 为已安装的 Google Chrome 版本安装 ChromeDriver
+
+      - name: 'Get Date'
+        run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Shenzhen' date '+%Y-%m-%d %T')"  # 设置环境变量 REPORT_DATE，值为深圳时区的当前日期和时间
+
+      - name: 'flowRate_warnRemotegithub'
+        env:
+          SITUYUN_USER: ${{ secrets.SITYUN_USER }}  # 使用密钥 SITYUN_USER 作为环境变量
+          SITUYUN_PASSWORD: ${{ secrets.SITYUN_PASSWORD }}  # 使用密钥 SITYUN_PASSWORD 作为环境变量
+        run: python flowRate_warnRemotegithub.py  # 运行 flowRate_warnRemotegithub.py 脚本
