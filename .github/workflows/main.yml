@@ -25,7 +25,7 @@ jobs:
           pip install -r requirements.txt  # 从 requirements.txt 安装所需的 Python 包
 
       - name: Install ChromeDriver
-          run:|
+        run: |
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
             && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 https://dl.google.com/linux/deb/pool/main/g/google-chrome-stable/google-chrome-stable_126.0.6478.126-1_amd64.deb) \
             && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "https://raw.githubusercontent.com/dreamshao/chromedriver/main/126.0.6478.126%20chromedriver-mac-arm64.zip" \
