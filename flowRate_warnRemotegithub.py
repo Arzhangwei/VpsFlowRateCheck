@@ -21,15 +21,6 @@ driver = webdriver.Chrome(options=options)
 
 
 
-
-pushplus = f'http://www.pushplus.plus/send?token={str(os.environ["PUSHPLUS"])}&title=服务器告警&content='
-
-
-async def push_wx(warnInfo):
-    response = requests.get(f"{pushplus}{warnInfo}",verify=False)
-    if "code\": \"0" in response.text:
-        pass
-
 ss = requests.session()
 PUSHPLUS_TOKEN = os.getenv('PUSHPLUS')
 async def push_wx(conten):
