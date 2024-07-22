@@ -55,10 +55,11 @@ async def main():
     used_space_gb = float(used_space)
 
     await push_wx(f'流量使用：{used_space_gb}GB')
+    print(f"警告：流量使用{used_space_gb}GB！")
     # 判断是否大于3000GB
     if used_space_gb > 3000:
         # 打印告警日志
-        print("警告：已使用的存储空间超过3000GB！")
+        print("警告：流量使用超过3000GB！")
         await push_wx('服务器告警：流量使用是超过3000GB！')
 # 运行主程序
 asyncio.run(main())
