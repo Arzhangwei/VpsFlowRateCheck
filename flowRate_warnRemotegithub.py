@@ -30,6 +30,14 @@ async def push_wx(warnInfo):
     if "code\": \"0" in response.text:
         pass
 
+ss = requests.session()
+PUSHPLUS_TOKEN = os.getenv('PUSHPLUS')
+async def push_wx(conten):
+    result = ss.get(f"https://wxpusher.zjiecode.com/demo/send/custom/{PUSHPLUS_TOKEN}?content={conten}").json()
+    if result['code'] == 1000:
+        print(f"账号Wxpusher 通知: 推送成功!")
+    else:
+        print(f"账号Wxpusher 通知: 推送失败!")
 
 
 async def main():
@@ -60,6 +68,6 @@ async def main():
     if used_space_gb > 3000:
         # 打印告警日志
         print("警告：已使用的存储空间超过3000GB！")
-        await push_wx('警告：流量使用是超过3000GB！')
+        await push_wx('服务器告警：流量使用是超过3000GB！')
 # 运行主程序
 asyncio.run(main())
