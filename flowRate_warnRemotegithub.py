@@ -3,8 +3,10 @@ import os
 import asyncio
 import requests
 
-
+# 有头
 # page = ChromiumPage()
+
+# 无头
 co = ChromiumOptions().headless()
 page = ChromiumPage(co)
 
@@ -18,6 +20,16 @@ async def push_wx(content):
         print(f"账号Wxpusher 通知: 推送成功!")
     else:
         print(f"账号Wxpusher 通知: 推送失败!")
+
+async def open_my_no_ip():
+    page.get("https://www.noip.com/login?ref_url=console")
+    await asyncio.sleep(15)  # 等待页面加载
+    # 输入用户名和密码并提交表单
+    page.ele("xpath://*[@id='username']").input(str(os.environ['NOIP_USERNAME']))
+    page.ele("xpath://*[@id='password']").input(str(os.environ['NOIP_PASSWORD']))
+    page.ele("xpath://*[@id='clogs-captcha-button']").click()
+    await asyncio.sleep(15)  # 等待页面加载
+    await push_wx('no-ip 登陆完成！')
 
 async def main():
     # 使用 DrissionPage 打开页面
@@ -47,5 +59,6 @@ async def main():
         print("警告：流量使用超过3000GB！")
         await push_wx('服务器告警：流量使用超过3000GB！')
 
+    await open_my_no_ip()
 # 运行主程序
 asyncio.run(main())
