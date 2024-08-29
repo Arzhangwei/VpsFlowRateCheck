@@ -29,4 +29,7 @@ jobs:
           CC_USERNAME: ${{ secrets.CC_USERNAME }}  # 使用密钥 SITYUN_USER 作为环境变量
           CC_PASSWORD: ${{ secrets.CC_PASSWORD }}  # 使用密钥 SITYUN_PASSWORD 作为环境变量
           PUSHPLUS: ${{ secrets.PUSHPLUS}}
+          NOIP_USERNAME: ${{ secrets.NOIP_USERNAME }}  # 使用密钥 SITYUN_USER 作为环境变量
+          NOIP_PASSWORD: ${{ secrets.NOIP_PASSWORD }}  # 使用密钥 SITYUN_PASSWORD 作为环境变量
+		  
         run: python flowRate_warnRemotegithub.py  # 运行 flowRate_warnRemotegithub.py 脚本
