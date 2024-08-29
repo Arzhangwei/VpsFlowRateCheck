@@ -43,7 +43,7 @@ async def main():
     print(f"警告：流量使用{used_space_gb}GB！")
     
     # 判断是否大于3000GB
-    if used_space_gb > 10:
+    if used_space_gb > 3000:
         print("警告：流量使用超过3000GB！")
         await push_wx('服务器告警：流量使用超过3000GB！')
 
