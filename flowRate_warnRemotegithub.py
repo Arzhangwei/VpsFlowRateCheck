@@ -59,6 +59,6 @@ async def main():
         print("警告：流量使用超过3000GB！")
         await push_wx('服务器告警：流量使用超过3000GB！')
 
-    await open_my_no_ip()
+    # await open_my_no_ip()
 # 运行主程序
 asyncio.run(main())
