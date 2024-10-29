@@ -21,15 +21,15 @@ async def push_wx(content):
     else:
         print(f"账号Wxpusher 通知: 推送失败!")
 
-async def open_my_no_ip():
-    page.get("https://www.noip.com/login?ref_url=console")
-    await asyncio.sleep(15)  # 等待页面加载
-    # 输入用户名和密码并提交表单
-    page.ele("xpath://*[@id='username']").input(str(os.environ['NOIP_USERNAME']))
-    page.ele("xpath://*[@id='password']").input(str(os.environ['NOIP_PASSWORD']))
-    page.ele("xpath://*[@id='clogs-captcha-button']").click()
-    await asyncio.sleep(15)  # 等待页面加载
-    await push_wx('no-ip 登陆完成！')
+# async def open_my_no_ip():
+#     page.get("https://www.noip.com/login?ref_url=console")
+#     await asyncio.sleep(15)  # 等待页面加载
+#     # 输入用户名和密码并提交表单
+#     page.ele("xpath://*[@id='username']").input(str(os.environ['NOIP_USERNAME']))
+#     page.ele("xpath://*[@id='password']").input(str(os.environ['NOIP_PASSWORD']))
+#     page.ele("xpath://*[@id='clogs-captcha-button']").click()
+#     await asyncio.sleep(15)  # 等待页面加载
+#     await push_wx('no-ip 登陆完成！')
 
 async def main():
     # 使用 DrissionPage 打开页面
