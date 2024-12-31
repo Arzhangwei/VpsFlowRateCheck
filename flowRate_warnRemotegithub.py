@@ -1,14 +1,15 @@
-from DrissionPage import ChromiumPage, ChromiumOptions
+
 import os
 import asyncio
 import requests
-
-# 有头
-# page = ChromiumPage()
-
+from DrissionPage import Chromium
 # 无头
-co = ChromiumOptions().headless()
-page = ChromiumPage(co)
+# co = ChromiumOptions().headless()
+# page = ChromiumPage(co)
+
+
+# 启动或接管浏览器，并创建标签页对象
+page = Chromium().latest_tab
 
 
 ss = requests.session()
